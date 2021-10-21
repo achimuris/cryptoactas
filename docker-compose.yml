@@ -1,0 +1,9 @@
+version: "3.3"
+
+services:
+  client:
+    container_name: app
+    build: .
+    image: app/image
+    
+
