@@ -1,21 +1,13 @@
 {
-  "name": "demo",
-  "version": "0.0.0",
-  "private": true,
+  "name": "mern-app",
+  "version": "1.0.0",
   "scripts": {
-    "start": "node ./bin/www",
-    "test": "mocha"
+    "start": "cd server && npm start",
+    "react-dev": "cd client && npm start",
+    "test": "cd server && npm test",
+    "preinstall": "cd server && npm install",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build"
   },
-  "dependencies": {
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "http-errors": "~1.6.2",
-    "morgan": "~1.9.0",
-    "pug": "2.0.0-beta11"
-  },
-  "devDependencies": {
-    "mocha": "^5.1.1",
-    "supertest": "^3.0.0"
-  }
+  "license": "ISC"
 }
