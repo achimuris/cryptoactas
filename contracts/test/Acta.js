@@ -1,5 +1,4 @@
-/*
-const miActa = artifacts.require("../contracts/Acta.sol");
+const miActa = artifacts.require("./Acta.sol");
 
 contract("Acta", accounts => {
   it("Acta ABC Profes Ing. D'", async () => {
@@ -9,9 +8,8 @@ contract("Acta", accounts => {
     await MyActa.set("Hey there!", { from: accounts[0] });
 
     // Get myString from public variable getter
-    const storedString = await miActa.miActa.call();
+    const storedString = await MyActa.miActa.call();
 
     assert.equal(storedString, "Hey there!", "The string was not stored");
   });
 });
-*/
