@@ -1,15 +1,28 @@
-FROM node:8.11-alpine
+FROM node:alpine
 
+# Labels
+LABEL version="1.0"
+LABEL description="Prototipo de base para imagen de Docker"
+LABEL maintainer="juancristianmiguel@gmail.com"
+
+# Create app directory
 WORKDIR /usr/src/app
 
-ARG NODE_ENV
-ENV NODE_ENV $NODE_ENV
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+COPY . .
 
-COPY package*.json /usr/src/app/
 RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
 
-COPY . /usr/src/app
+# Bundle app source
+#COPY . .
+#WORKDIR ./client
+RUN npm run build
 
-ENV PORT 5000
+ENV PORT 8080
 EXPOSE $PORT
 CMD [ "npm", "start" ]

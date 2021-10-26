@@ -1,5 +1,5 @@
 {
-  "name": "mern-app",
+  "name": "crypto-actas",
   "version": "1.0.0",
   "scripts": {
     "start": "cd server && npm start",
@@ -9,5 +9,5 @@
     "install": "cd client && npm install",
     "build": "cd client && npm run build"
   },
-  "license": "ISC"
+  "license": "???"
 }
