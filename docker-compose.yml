@@ -2,8 +2,11 @@ version: "3.3"
 
 services:
   client:
-    container_name: app
+    container_name: cryptoactas
     build: .
-    image: app/image
+    image: cryptoactas/image
+    ports:
+     - "8080:8080"
+
     
 

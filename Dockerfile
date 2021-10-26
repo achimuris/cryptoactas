@@ -1,4 +1,4 @@
-FROM node:17
+FROM node:alpine
 
 # Labels
 LABEL version="1.0"
