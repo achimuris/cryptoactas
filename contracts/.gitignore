@@ -1,0 +1,11 @@
+# Ignore sobre aplicacion en Solidity
+
+
+## Objetos compilados con datos o referencias locales
+
+### Ruta de compilacion por defecto
+/build
+
+### Ruta de compilacion para el cliente
+# [TODO]: reapuntar al template de cliente montado por Migue
+/client/src/contracts
