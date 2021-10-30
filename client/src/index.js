@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App';
+import Main from './components/Main';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App title="Crypto Actas"/>
+    <Main title="Crypto Actas"/>
   </React.StrictMode>,
   document.getElementById('root')
 );
