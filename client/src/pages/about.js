@@ -1,18 +1,14 @@
 import React from 'react';
-  
+import Nosotros from "./Nosotros.png"
+
 const About = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'Right',
-        alignItems: 'Right',
-        height: '100vh'
-      }}
-    >
-      <h1>GeeksforGeeks is a Computer Science portal for geeks.</h1>
+    <div align='center' >
+      <h1>Integrantes del equipo</h1>
+      <p/>
+      <img src={Nosotros} />
     </div>
   );
 };
-  
+
 export default About;
