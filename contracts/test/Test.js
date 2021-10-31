@@ -14,4 +14,4 @@ contract("Acta", accounts => {
     assert.equal(storedString, "Hey there!", "The string was not stored");
   });
 });
-*/
+*/T
