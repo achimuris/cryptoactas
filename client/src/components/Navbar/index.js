@@ -24,8 +24,8 @@ const Navbar = () => {
           <NavLink to='/crud_materias' activeStyle>
             Adm. Materias
           </NavLink>
-          <NavLink to='/crud_estudios' activeStyle>
-            Adm. Plan Estudios
+          <NavLink to='/crud_actas' activeStyle>
+            Adm. Actas
           </NavLink>
           <NavLink to='/logout' activeStyle>
             Cerrar sesión

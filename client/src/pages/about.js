@@ -6,7 +6,7 @@ const About = () => {
     <div align='center' >
       <h1>Integrantes del equipo</h1>
       <p/>
-      <img src={Nosotros} />
+      <img src={Nosotros}/>
     </div>
   );
 };

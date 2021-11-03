@@ -1,0 +1,33 @@
+import React from 'react';
+import './Buttons.css';
+
+const Crud_Materias = () => {
+  return (
+    <div align='center' >
+      <h1>Administración de materias</h1>
+      <p/>
+      <button class="favorite styled" formaction='/create'
+        type='button'>
+        Cargar nueva materia
+      </button>
+	<br/> <br/>
+      <button class="favorite styled" path='/read'
+        type="submit">
+        Consultar materia existente
+      </button>
+	<br/> <br/>
+      <button class="favorite styled"
+        type="button">
+        Modificar materia
+      </button>
+	<br/> <br/>
+      <button class="favorite styled"
+        type="button">
+        Eliminar materia
+      </button>
+
+    </div>
+  );
+};
+
+export default Crud_Materias;
