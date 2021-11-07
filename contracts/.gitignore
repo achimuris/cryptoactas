@@ -6,6 +6,9 @@
 ### Ruta de compilacion por defecto
 /build
 
+### Rutas agregadas al cambiar al compilador ^0.8.0
+contracts/bin/
+
 ### Ruta de compilacion para el cliente
 # [TODO]: reapuntar al template de cliente montado por Migue
 /client/src/contracts
