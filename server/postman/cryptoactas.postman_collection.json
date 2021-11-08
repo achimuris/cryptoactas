@@ -1,0 +1,644 @@
+{
+	"info": {
+		"_postman_id": "b5391346-8038-409b-91f3-5dda8eb76b97",
+		"name": "cryptoactas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "actas",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/actas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"actas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/actas/618830979a0d88fd9678b55e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"actas",
+								"618830979a0d88fd9678b55e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/actas/618830979a0d88fd9678b55e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"actas",
+								"618830979a0d88fd9678b55e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Day\": 30,\r\n    \"Month\": 11,\r\n    \"Year\": 2021,\r\n    \"Shift\": \"Tarde\",\r\n    \"IdTenuredProfessor\": 1,\r\n    \"IdSubject\": 23,\r\n    \"IdSyllabu\": \"\",\r\n    \"Notes\": [{\"IdStudent\":1,\"Note\":10},{\"IdStudent\":3,\"Note\":9}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/actas/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"actas",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Day\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/actas/618823ef9a0d88fd9678b517",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"actas",
+								"618823ef9a0d88fd9678b517"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "planes",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/planes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"planes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/planes/618823fc9a0d88fd9678b51a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"planes",
+								"618823fc9a0d88fd9678b51a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/planes/618823fc9a0d88fd9678b51a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"planes",
+								"618823fc9a0d88fd9678b51a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Code\": \"TEC99\",\r\n    \"Description\": \"Plan 2023\",\r\n    \"YearOfValidity\": 2023,\r\n    \"Carrera\": \"Tecnicatura en Desarrollo de Software\",\r\n    \"Major\": \"UPE - Universidad Provincial de Ezeiza\",\r\n    \"Subjects\": [{\r\n        \"IdSubject\": 1,\r\n        \"Code\": 1,\r\n        \"Name\": \"SW y los Nuevos Escenarios\",\r\n        \"TeachingHours\": 6\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/planes/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"planes",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Description\": \"Plan 2018 (cargado tarde)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/planes/618823fc9a0d88fd9678b51a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"planes",
+								"618823fc9a0d88fd9678b51a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "carreras",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/carreras",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carreras"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/planes/618823fc9a0d88fd9678b51a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"planes",
+								"618823fc9a0d88fd9678b51a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/planes/618823fc9a0d88fd9678b51a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"planes",
+								"618823fc9a0d88fd9678b51a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Code\": \"TEC99\",\r\n    \"Description\": \"Plan 2023\",\r\n    \"YearOfValidity\": 2023,\r\n    \"Carrera\": \"Tecnicatura en Desarrollo de Software\",\r\n    \"Major\": \"UPE - Universidad Provincial de Ezeiza\",\r\n    \"Subjects\": [{\r\n        \"IdSubject\": 1,\r\n        \"Code\": 1,\r\n        \"Name\": \"SW y los Nuevos Escenarios\",\r\n        \"TeachingHours\": 6\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/planes/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"planes",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Description\": \"Plan 2018 (cargado tarde)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/planes/618823fc9a0d88fd9678b51a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"planes",
+								"618823fc9a0d88fd9678b51a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "universidades",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/universidades",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"universidades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/universidades/61858dad2edda3c384e2f6dc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"universidades",
+								"61858dad2edda3c384e2f6dc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/universidades/61858dad2edda3c384e2f6dc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"universidades",
+								"61858dad2edda3c384e2f6dc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"Universidad Provincial de Wilde\",\r\n    \"Majors\": [{\r\n        \"Name\": \"Tecnicatura en Desarrollo de Software\",\r\n        \"Syllabus\": [{\r\n            \"Major\": {\r\n                \"Name\": \"Tecnicatura en desarrollo de software\",\r\n                \"Syllabus\": null\r\n            },\r\n            \"Year\": 2019,\r\n            \"Subjects\": [{\r\n                \"IdSubject\": 1,\r\n                \"Code\": \"01\",\r\n                \"Name\": \"Introducción al campo profesional\",\r\n                \"TeachingHours\": 32\r\n            }, {\r\n                \"IdSubject\": 2,\r\n                \"Code\": \"02\",\r\n                \"Name\": \"Alfabetización Académica\",\r\n                \"TeachingHours\": 96\r\n            }, {\r\n                \"IdSubject\": 3,\r\n                \"Code\": \"03\",\r\n                \"Name\": \"Politica y Sociedad\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 4,\r\n                \"Code\": \"04\",\r\n                \"Name\": \"Introducción al Desarrollo de Software\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 5,\r\n                \"Code\": \"05\",\r\n                \"Name\": \"Matemática I\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 6,\r\n                \"Code\": \"06\",\r\n                \"Name\": \"Fundamentos de la Electrónica\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 7,\r\n                \"Code\": \"07\",\r\n                \"Name\": \"Estructura de Datos y Algoritmos I\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 8,\r\n                \"Code\": \"08\",\r\n                \"Name\": \"Software y Los Nuevos Escenarios\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 9,\r\n                \"Code\": \"09\",\r\n                \"Name\": \"Matemática II\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 10,\r\n                \"Code\": \"10\",\r\n                \"Name\": \"Sistemas Operativos\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 11,\r\n                \"Code\": \"11\",\r\n                \"Name\": \"Base de datos I\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 12,\r\n                \"Code\": \"12\",\r\n                \"Name\": \"Testing\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 13,\r\n                \"Code\": \"13\",\r\n                \"Name\": \"Estructura de Datos y Algoritmos II\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 14,\r\n                \"Code\": \"14\",\r\n                \"Name\": \"Matemática III\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 15,\r\n                \"Code\": \"15\",\r\n                \"Name\": \"Redes de Computadora I\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 16,\r\n                \"Code\": \"16\",\r\n                \"Name\": \"Ingeniería de Requisitos\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 17,\r\n                \"Code\": \"17\",\r\n                \"Name\": \"Taller de Modelado - PPS\",\r\n                \"TeachingHours\": 96\r\n            }, {\r\n                \"IdSubject\": 18,\r\n                \"Code\": \"18\",\r\n                \"Name\": \"Programación en Tiempo Real\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 19,\r\n                \"Code\": \"19\",\r\n                \"Name\": \"Técnicas de Programación\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 20,\r\n                \"Code\": \"20\",\r\n                \"Name\": \"Base de Datos II\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 21,\r\n                \"Code\": \"21\",\r\n                \"Name\": \"Redes de Computadora II\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 22,\r\n                \"Code\": \"22\",\r\n                \"Name\": \"Electiva I\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 23,\r\n                \"Code\": \"23\",\r\n                \"Name\": \"Programación Web\",\r\n                \"TeachingHours\": 96\r\n            }, {\r\n                \"IdSubject\": 24,\r\n                \"Code\": \"24\",\r\n                \"Name\": \"Ingeniería del Software\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 25,\r\n                \"Code\": \"25\",\r\n                \"Name\": \"Seguridad Informática\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 26,\r\n                \"Code\": \"26\",\r\n                \"Name\": \"Electiva II\",\r\n                \"TeachingHours\": 64\r\n            }, {\r\n                \"IdSubject\": 27,\r\n                \"Code\": \"27\",\r\n                \"Name\": \"Proyecto de Software - PPS II\",\r\n                \"TeachingHours\": 64\r\n            }],\r\n            \"ID\": 1\r\n        }]\r\n    }],\r\n    \"Address\": \"Poner aquí una dirección\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/universidades/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"universidades",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Address\": \"Alfonsina Storni 41, B1802 Ezeiza, Provincia de Buenos Aires\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/universidades/61858dad2edda3c384e2f6dc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"universidades",
+								"61858dad2edda3c384e2f6dc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "usuarios",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/usuarios/61858db92edda3c384e2f6e0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"61858db92edda3c384e2f6e0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/usuarios/61858db92edda3c384e2f6e0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"61858db92edda3c384e2f6e0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserName\": \"ngarrido\",\r\n    \"Pass\": \"12345678\",\r\n    \"TypeOfUser\": 1,\r\n    \"Name\": \"Nicolás\",\r\n    \"LastName\": \"Garrido\",\r\n    \"DocumentNumber\": 33511844\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/usuarios/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuarios",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"Germán Adrián\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/universidades/61858db92edda3c384e2f6e0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"universidades",
+								"61858db92edda3c384e2f6e0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
