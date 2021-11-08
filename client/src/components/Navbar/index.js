@@ -21,8 +21,8 @@ const Navbar = () => {
           <NavLink to='/crud_users' activeStyle>
             Adm. Usuarios
           </NavLink>
-          <NavLink to='/crud_materias' activeStyle>
-            Adm. Materias
+          <NavLink to='/crud_plan' activeStyle>
+            Adm. Plan Estudios
           </NavLink>
           <NavLink to='/crud_actas' activeStyle>
             Adm. Actas
