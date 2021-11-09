@@ -1,29 +1,33 @@
 const SyllabusContract = artifacts.require("./Syllabus.sol");
 
 contract("Syllabus", accounts => {
+  const developer = accounts[0];
+  const unknown_1 = accounts[1];
+  const unknown_2 = accounts[2];
+  const upeWallet = accounts[3];
+  const utnWallet = accounts[4];
 
-  it("Escribe un array de planes para la UPE y obtiene el segundo", async() => {
+  it("La UPE escribe un array de planes y obtiene el segundo", async() => {
     const syllabus = await SyllabusContract.deployed();
 
-    // Universidad
     let institution = "UPE";
-      // Planes de estudio
-      let planes = [["DS-P2016","Desarrollo de software 1"],
-                    ["DS-P2019","Desarrollo de software 2"]
-                   ];
-        // Materias
-        let materias =  [[{id:"a3c1TP16", name:"Técnicas de programación"},
-                          {id:"a3c1PTR16",name:"Programación en tiempo real"}
-                         ],
-                         [{id:"a1c2FE19", name:"Fundamentos de electrónica"},
-                          {id:"a2c1QA19", name:"Testing"},
-                          {id:"a2c2IQ19", name:"Ingeriería de requisitos"}
-                         ]
-                        ];
-        
-    await syllabus.submitData( institution, planes, materias, { from: accounts[0] } );
     
-    const storedSyllabusName = await syllabus.getSyllabusName(1);
+    let planes = [{name:"DS-P2016", carreer: "Desarrollo de software 1"},
+                  {name:"DS-P2019", carreer: "Desarrollo de software 2"}
+                 ];
+
+    let materias =  [[{id:"a3c1TP16", name:"Técnicas de programación"},
+                      {id:"a3c1PTR16",name:"Programación en tiempo real"}
+                     ],
+                     [{id:"a1c2FE19", name:"Fundamentos de electrónica"},
+                      {id:"a2c1QA19", name:"Testing"},
+                      {id:"a2c2IQ19", name:"Ingeriería de requisitos"}
+                     ]
+                    ];
+
+    await syllabus.submitData( institution, planes, materias, { from: upeWallet } );
+    
+    const storedSyllabusName = await syllabus.getSyllabusName(1, { from: upeWallet } );
     assert.equal(storedSyllabusName, "DS-P2019", "Can not retrieve the target Syllabus");
   });
 
@@ -31,23 +35,68 @@ contract("Syllabus", accounts => {
   it("Ahora obtiene el primer Plan entero", async () => {
     const syllabus = await SyllabusContract.deployed();
     
-    let syllabusData = await syllabus.getSyllabus(0);
-    assert.equal(syllabusData.carreer, "Desarrollo de software 1", "Can not retrieve the target carreer");
+    let syllabusData1 = await syllabus.getSyllabus(0, { from: upeWallet } );
+    assert.equal(syllabusData1.carreer, "Desarrollo de software 1", "Can not retrieve the target carreer");
   });
 
 
   it("Obtiene el nombre de una materia del primer plan", async () => {
     const syllabus = await SyllabusContract.deployed();
     
-    let subjectName = await syllabus.getSubjectName( 0, 1 );
+    let subjectName = await syllabus.getSubjectName( 0, 1, { from: upeWallet } );
     assert.equal(subjectName, "Programación en tiempo real", "Can not retrieve the target subject");
   });
 
 
-  it("Oobtiene el nombre de una materia del segundo plan", async () => {
+  it("Obtiene el nombre de una materia del segundo plan", async () => {
     const syllabus = await SyllabusContract.deployed();
     
-    let subjectName = await syllabus.getSubjectName( 1, 2 );
+    let subjectName = await syllabus.getSubjectName( 1, 2, { from: upeWallet } );
     assert.equal(subjectName, "Ingeriería de requisitos", "Can not retrieve the target subject");
   });
+
+  
+  it("Otra Universidad (UTN) escribe un array de planes y obtiene el primero", async() => {
+    const syllabus = await SyllabusContract.deployed();
+
+    let institution = "UTN";
+
+    let planes = [{name:"IE-P1995", carreer: "Ingeniería Electrónica 1"},
+                  {name:"IE-P2006", carreer: "Ingeniería Electrónica 2"}
+                 ];
+
+    let materias =  [[{id:"a4c0ME95", name:"Medios de enlace"},
+                      {id:"a2c0CN95", name:"Cálculo numérico"},
+                      {id:"a1c0DE95", name:"Dispositivos electrónicos"}
+                     ],
+                     [{id:"a5c2EP06", name:"Electrónica de potencia"},
+                      {id:"a3c0TE06", name:"Tecnología de las empresas"}
+                     ]
+                    ];
+
+    await syllabus.submitData( institution, planes, materias, { from: utnWallet } );
+    
+    const storedSyllabusName = await syllabus.getSyllabusName(0, {from: utnWallet});
+    assert.equal(storedSyllabusName, "IE-P1995", "Can not retrieve the target Syllabus");
+  });
+
+
+  it("Ahora UTN intenta leer plan de la UPE, pero no tiene acceso", async () => {
+    const syllabus = await SyllabusContract.deployed();
+    try {
+      let syllabusData2 = await syllabus.getInstitutionSyllabus( upeWallet, 1, { from: utnWallet } );
+      assert.equal(syllabusData2.name, "DS-P2019", "Can not retrieve the target plan name");
+    } catch (error) {
+      assert.equal(error, "rror: Returned error: VM Exception while processing transaction: revert Only owner can call this function.", console.error());
+    }
+  });
+
+
+  it("El address dueño del contrato si tiene acceso y puede leer todos los planes", async () => {
+    const syllabus = await SyllabusContract.deployed();
+
+    let syllabusData3 = await syllabus.getInstitutionSyllabus( upeWallet, 1, { from: developer } );
+    assert.equal(syllabusData3.name, "DS-P2019", "Can not retrieve the target plan name");
+  });
+
 });
