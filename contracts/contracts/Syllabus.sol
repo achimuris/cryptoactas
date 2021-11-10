@@ -29,9 +29,7 @@ abstract contract Ownable {
   }
 }
 
-/**
- *  Estructuras globales para el pasaje de argumentos al contrato principal
- */
+/** Estructuras globales para el pasaje de argumentos al contrato principal */
   struct Subject {
       string id;
       string name;
@@ -60,7 +58,8 @@ contract Syllabus is Ownable {
     string  name;
     SyllabusData[] syllabuses;
   }
-  
+  event SyllabusRepeated( string indexed SyllabusName,
+                          uint16 indexed currenteIndex );
   modifier validIndex( uint16 index ) {
     require( index < institutions[msg.sender].syllabuses.length,
              "Index out of range" );
@@ -71,26 +70,40 @@ contract Syllabus is Ownable {
   string constant   _version = "0.0";
   address immutable _owner = msg.sender;
 
+  function isNewSyllabus( SyllabusHeader memory syllabus ) private returns (bool) {
+      SyllabusData[] storage ss = institutions[msg.sender].syllabuses;
+      for (uint16 idx = 0; idx < ss.length; idx++) {
+        if ( keccak256(abi.encodePacked(syllabus.name)) == keccak256(abi.encodePacked(ss[idx].name)) ) {
+          emit SyllabusRepeated( syllabus.name, idx );
+          return false;
+        }
+      }
+      return true;
+  }
 
-  function submitData( string memory inst , SyllabusHeader[] memory syls, Subject[][] memory sbjs ) public {
+  function submitData( string memory inst , SyllabusHeader[] memory syls, Subject[][] memory sbjs ) public payable {
 
-      //Institution storage i = institutions[msg.sender];
       Institution storage i = institutions[msg.sender];
       // bool newInstitution = false;
-      // if( i.addr == 0x00 ) newInstitution = true;
-      //require( i.addr == address(0), "This institution already have some syllabuses and cannot add another one.");
-
-      i.vers = _version;
-      i.addr = msg.sender; // podria ser clave de busqueda en un mapping ( address => institution )
-      i.name = inst;
-
+      if( i.addr != address(0) ) {
+        require( keccak256(abi.encodePacked(i.name)) == keccak256(abi.encodePacked(inst)),
+                "Wrong name for this institution" );
+        require( keccak256(abi.encodePacked(i.vers)) == keccak256(abi.encodePacked(_version)),
+                "This transaccion version message is different from the structure data" );
+      } else {
+        i.vers = _version;
+        i.addr = msg.sender;
+        i.name = inst;
+      }
       // Una vez que seteamos los datos de la institucion, pusheamos una nueva instancia (s) para
       //   cada uno de los nuevos planes de estudio y cargamos sus datos
       for (uint16 idx1 = 0; idx1 < syls.length; idx1++) {
+
+        if ( !isNewSyllabus(syls[idx1]) ) continue;
+
         SyllabusData storage s = i.syllabuses.push();
         s.name = syls[idx1].name;
         s.carreer = syls[idx1].carreer;
-
         // A continuación obtenemos el primer array de array de materias (thisSyllabusSubjects) y lo
         //    recorremos pusheando cada una de las materias al plan correspondiente referenciado por s
         Subject[] memory thisSyllabusSubjects = sbjs[idx1];
@@ -100,10 +113,12 @@ contract Syllabus is Ownable {
       }
   }
 
-  function getSyllabusName( uint8 index ) public view validIndex( index )
-    returns (string memory searchSyllabus) {
+  function getSyllabusNames() public view 
+    returns (string[10] memory mySyllNames) {
       Institution storage i = institutions[msg.sender];
-      return i.syllabuses[index].name;
+      for (uint16 idx1 = 0; idx1 < i.syllabuses.length; idx1++){
+        mySyllNames[idx1] = i.syllabuses[idx1].name;
+      }
   }
 
   function getSyllabus( uint16 index ) public view validIndex( index )
@@ -118,6 +133,13 @@ contract Syllabus is Ownable {
       require( index < i.syllabuses.length,
               "Index out of range for specific institution Id" );
       return i.syllabuses[index];
+  }
+
+  // Estos métodos se pueden quitar para el deploy final
+  function getSyllabusName( uint8 index ) public view validIndex( index )
+    returns (string memory searchSyllabus) {
+      Institution storage i = institutions[msg.sender];
+      return i.syllabuses[index].name;
   }
 
   function getSubjectName( uint16 syllabusIdx, uint16 subjectIdx ) public view validIndex( syllabusIdx )
