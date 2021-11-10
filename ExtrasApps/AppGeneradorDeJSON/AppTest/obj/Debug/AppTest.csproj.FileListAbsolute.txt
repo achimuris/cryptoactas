@@ -1,0 +1,10 @@
+C:\Users\Andres\source\repos\AppTest\AppTest\bin\Debug\AppTest.exe.config
+C:\Users\Andres\source\repos\AppTest\AppTest\bin\Debug\AppTest.exe
+C:\Users\Andres\source\repos\AppTest\AppTest\bin\Debug\AppTest.pdb
+C:\Users\Andres\source\repos\AppTest\AppTest\bin\Debug\Clases.dll
+C:\Users\Andres\source\repos\AppTest\AppTest\bin\Debug\Clases.pdb
+C:\Users\Andres\source\repos\AppTest\AppTest\obj\Debug\AppTest.csproj.AssemblyReference.cache
+C:\Users\Andres\source\repos\AppTest\AppTest\obj\Debug\AppTest.csproj.CoreCompileInputs.cache
+C:\Users\Andres\source\repos\AppTest\AppTest\obj\Debug\AppTest.exe
+C:\Users\Andres\source\repos\AppTest\AppTest\obj\Debug\AppTest.pdb
+C:\Users\Andres\source\repos\AppTest\AppTest\obj\Debug\AppTest.csproj.CopyComplete
