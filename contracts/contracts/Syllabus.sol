@@ -104,7 +104,7 @@ contract Syllabus is Ownable {
         SyllabusData storage s = i.syllabuses.push();
         s.name = syls[idx1].name;
         s.carreer = syls[idx1].carreer;
-        // A continuación obtenemos el primer array de array de materias (thisSyllabusSubjects) y lo
+        // A continuacion obtenemos el primer array de array de materias (thisSyllabusSubjects) y lo
         //    recorremos pusheando cada una de las materias al plan correspondiente referenciado por s
         Subject[] memory thisSyllabusSubjects = sbjs[idx1];
         for (uint16 idx2 = 0; idx2 < thisSyllabusSubjects.length; idx2++) {
@@ -113,7 +113,7 @@ contract Syllabus is Ownable {
       }
   }
 
-  function getSyllabusNames() public view 
+  function getSyllabusNames() public view
     returns (string[10] memory mySyllNames) {
       Institution storage i = institutions[msg.sender];
       for (uint16 idx1 = 0; idx1 < i.syllabuses.length; idx1++){
@@ -135,7 +135,7 @@ contract Syllabus is Ownable {
       return i.syllabuses[index];
   }
 
-  // Estos métodos se pueden quitar para el deploy final
+  // Estos metodos se pueden quitar para el deploy final
   function getSyllabusName( uint8 index ) public view validIndex( index )
     returns (string memory searchSyllabus) {
       Institution storage i = institutions[msg.sender];
