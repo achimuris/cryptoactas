@@ -6,7 +6,7 @@ class SetString extends React.Component {
   handleKeyDown = e => {
     // if the enter key is pressed, set the value with the string
     if (e.keyCode === 13) {
-      //e.target.value = "chimu"
+      e.target.value = "chimu"
       this.setValue(e.target.value);
     }
   };
