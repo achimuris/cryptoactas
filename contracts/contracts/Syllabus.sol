@@ -68,7 +68,7 @@ contract Syllabus is Ownable {
 
   mapping  ( address => Institution ) public institutions;
   string constant   _version = "0.0";
-  string public constant   _unEjemplo = "Una prueba";
+  string public   _unEjemplo = "Una prueba";
   address immutable _owner = msg.sender;
 
   function isNewSyllabus( SyllabusHeader memory syllabus ) private returns (bool) {
@@ -83,7 +83,7 @@ contract Syllabus is Ownable {
   }
 
   function submitData( string memory inst , SyllabusHeader[] memory syls, Subject[][] memory sbjs ) public payable {
-
+      
       Institution storage i = institutions[msg.sender];
       // bool newInstitution = false;
       if( i.addr != address(0) ) {
@@ -105,6 +105,7 @@ contract Syllabus is Ownable {
         SyllabusData storage s = i.syllabuses.push();
         s.name = syls[idx1].name;
         s.carreer = syls[idx1].carreer;
+        _unEjemplo = s.name;
         // A continuacion obtenemos el primer array de array de materias (thisSyllabusSubjects) y lo
         //    recorremos pusheando cada una de las materias al plan correspondiente referenciado por s
         Subject[] memory thisSyllabusSubjects = sbjs[idx1];
@@ -137,8 +138,7 @@ contract Syllabus is Ownable {
   }
 
   // Estos metodos se pueden quitar para el deploy final
-  // validIndex( index )
-  function getSyllabusName( uint8 index ) public view 
+  function getSyllabusName( uint8 index ) public view validIndex( index )
     returns (string memory searchSyllabus) {
       Institution storage i = institutions[msg.sender];
       return i.syllabuses[index].name;

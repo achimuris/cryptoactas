@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+//import { findRenderedDOMComponentWithClass } from 'react-dom/test-utils';
+import ReadSyllabus from "./ReadSyllabus";
+import WriteSyllabus from "./WriteSyllabus";
 
-
-class BCSyllabus extends Component {
-  state = { loading: true, drizzleState: null };
+class App extends Component {
+  state = { loading: true, drizzleState: null, packData: null };
+  packData = null;
 
   constructor() {
     super();
+    this.getBackendSyllabuses = this.getBackendSyllabuses.bind(this);
+    console.log(this.state);
   }
 
   componentDidMount() {
@@ -24,12 +29,8 @@ class BCSyllabus extends Component {
     });
   }
  
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
- 
-
-  setValue = () => {   
+  getBackendSyllabuses() {
+    
     let institution = "UTN";
 
     let planes = [{name:"IE-P1995", carreer: "Ingeniería Electrónica 1"},
@@ -44,39 +45,33 @@ class BCSyllabus extends Component {
                       {id:"a3c0TE06", name:"Tecnología de las empresas"}
                      ]
                     ];
-
-
-    const contract = this.props.drizzle.contracts.Syllabus;
-    const stackId = contract.methods["submitData"].cacheSend( institution, planes, materias, { from: this.state.drizzleState.accounts[1], gas: 3000000 } );
-
-
-    /* BUSCAR LO QUE SE GRABO */
-    // save the `stackId` for later reference
-
-    
-    this.setState({ stackId });
-  };
-
-  getValores = () => {
-    const contract = this.props.drizzle.contracts.Syllabus;
-    const nombrePlan =  contract.methods["getSyllabusName"].call(0, { from: this.state.drizzleState.accounts[1]});
-
-    //const nombrePlan = contract.getSyllabusName(0);
-
-
-    console.log(nombrePlan); //JSON.stringify(nombrePlan));
+    // let packData = {institution, planes, materias};
+    // this.setState({packData});
+    this.state.packData = {institution, planes, materias};
+    console.log("Aquí se debe buscar en MongoDB, obtener los planes y pasarlos al WriteSyllabus.js");
+    console.log(this.state);
   }
 
   render() {
     if (this.state.loading) return "Loading Drizzle...";
     return (
         <div className="App-header">
-            <input type="submit" value="Grabar en la BC" onClick={this.setValue} /> 
-            <input type="text" name="nombre"></input>
-            <input type="submit" value="Leer de la BC" onClick={this.getValores} />
+            <ReadSyllabus
+              drizzle={this.props.drizzle}
+              drizzleState={this.state.drizzleState}
+            />
+            <input type="button" value="CargarDatos" onClick={this.getBackendSyllabuses}
+            /><br/><br/>
+            <WriteSyllabus
+              drizzle={this.props.drizzle}
+              drizzleState={this.state.drizzleState}
+              valueData={this.state.packData}
+            />
         </div>
-    );
+    );        // Estaría bueno poder pasar por estas props del WriteSyllabus los Syllabus
   }
+
+
 }
 
-export default BCSyllabus;
+export default App;

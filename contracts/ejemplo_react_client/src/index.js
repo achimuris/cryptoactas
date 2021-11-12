@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import BCSyllabus from './BCSyllabus';
+import App from './App';
+// import BCSyllabus from './BCSyllabus';
+// import ReadSyllabus from './ReadSyllabus';
 
 // import drizzle functions and contract artifact
-import { Drizzle, generateStore } from "@drizzle/store";
+import { Drizzle } from "@drizzle/store";
 import ContractSyllabus from "./contracts/Syllabus.json";
  
 // let drizzle know what contracts we want and how to access our test blockchain
@@ -19,4 +21,4 @@ const options = {
  
 // setup the drizzle store and drizzle
 const drizzle = new Drizzle(options);
-ReactDOM.render(<BCSyllabus drizzle={drizzle} />, document.getElementById('root'));
+ReactDOM.render(<App drizzle={drizzle} />, document.getElementById('root'));
