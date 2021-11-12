@@ -66,8 +66,9 @@ contract Syllabus is Ownable {
     _;
   }
 
-  mapping ( address => Institution ) institutions;
+  mapping  ( address => Institution ) public institutions;
   string constant   _version = "0.0";
+  string public constant   _unEjemplo = "Una prueba";
   address immutable _owner = msg.sender;
 
   function isNewSyllabus( SyllabusHeader memory syllabus ) private returns (bool) {
@@ -136,7 +137,8 @@ contract Syllabus is Ownable {
   }
 
   // Estos metodos se pueden quitar para el deploy final
-  function getSyllabusName( uint8 index ) public view validIndex( index )
+  // validIndex( index )
+  function getSyllabusName( uint8 index ) public view 
     returns (string memory searchSyllabus) {
       Institution storage i = institutions[msg.sender];
       return i.syllabuses[index].name;

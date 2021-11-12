@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReadActas from './ReadActas';
 
 
 class BCSyllabus extends Component {
@@ -29,7 +30,8 @@ class BCSyllabus extends Component {
   }
  
 
-  setValue = () => {   
+  setValue = () => { 
+
     let institution = "UTN";
 
     let planes = [{name:"IE-P1995", carreer: "Ingeniería Electrónica 1"},
@@ -53,24 +55,53 @@ class BCSyllabus extends Component {
     /* BUSCAR LO QUE SE GRABO */
     // save the `stackId` for later reference
 
+    console.log(stackId);
+
     
     this.setState({ stackId });
   };
 
   getValores = () => {
     const contract = this.props.drizzle.contracts.Syllabus;
-    const nombrePlan =  contract.methods["getSyllabusName"].call(0, { from: this.state.drizzleState.accounts[1]});
+    const nombrePlan =  contract.methods["getSyllabusName"].cacheCall(0);
+    console.log("Nombre plan 1 " + nombrePlan);
 
+    //const {Syllabus} = this.state.drizzleState.contracts;
+    //const displayData = Syllabus.getSyllabusName(0)[nombrePlan];
+    //console.log(displayData);
+
+    // console.log(contract.methods.getSyllabusName(0));
+
+    // console.log(contract);
+
+
+    //1. make the call to the `storedData` method of our SimpleStorage contract. dataKey is returned.
+    const dataKey = this.props.drizzle.contracts.Syllabus.methods.getSyllabusName.cacheCall(0);
+    //2. return the resulting state value using dataKey.
+    console.log("Valor de dataKey: " + dataKey);
+    console.log("Resultado" +  this.props.drizzle.contracts.Syllabus.methods.getSyllabusName[dataKey]);
+
+
+    //const nombrePlan = contract.methods["_unEjemplo"].cache();
     //const nombrePlan = contract.getSyllabusName(0);
 
+    //const llamada = contract.methods["_unEjemplo"].cacheCall()[nombrePlan];
+    //const llamada = contract._unEjemplo[nombrePlan];
+    //console.log("nombre Plan 2 " + nombrePlan);
+    //console.log(JSON.stringify(llamada));
 
-    console.log(nombrePlan); //JSON.stringify(nombrePlan));
+     //JSON.stringify(nombrePlan));
   }
 
   render() {
     if (this.state.loading) return "Loading Drizzle...";
     return (
         <div className="App-header">
+            <ReadActas
+                drizzle={this.props.drizzle}
+                drizzleState={this.state.drizzleState}
+              />
+
             <input type="submit" value="Grabar en la BC" onClick={this.setValue} /> 
             <input type="text" name="nombre"></input>
             <input type="submit" value="Leer de la BC" onClick={this.getValores} />
