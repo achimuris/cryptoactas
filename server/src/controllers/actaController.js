@@ -7,7 +7,7 @@ connection.on("error", (err) => {
   console.log("Error en la conexión a la base de datos", err);
 });
 
-const modelActa = mongoose.model('examsreport', { "Day": Number, "Month": Number, "Year": Number, "Shift": String, "IdTenuredProfessor": Number, "IdVocalProfessor1": Number, "IdVocalProfessor2": Number, "IdSubject": Number, "IdSyllabu": String, "Notes": Array}, 'examsreport');
+const modelActa = mongoose.model('examsreport', { "Day": Number, "Month": Number, "Year": Number, "Shift": String, "IdTenuredProfessor": String, "IdVocalProfessor1": String, "IdVocalProfessor2": String, "IdSubject": String, "IdSyllabus": String, "Notes": Array}, 'examsreport');
 
 exports.index = function(req, res) {
     modelActa.find()
@@ -25,7 +25,7 @@ exports.create = function(req, res) {
     acta.save().catch(err => {
       res.json({response: "error"})
     });
-    res.json({response: "success"})
+    res.json({response: "success", req: req.body})
 }
 
 exports.read = function(req, res) {
@@ -44,7 +44,7 @@ exports.update = function(req, res) {
 
     modelActa.findByIdAndUpdate({_id: id},{$set: req.body})
       .then(reg => {
-        res.json({response: "success"})
+        res.json({response: "success", req: req.body})
       })
       .catch(err => {
         res.json({response: "error"})
