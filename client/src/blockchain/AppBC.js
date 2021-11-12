@@ -6,14 +6,12 @@ class AppBC extends Component {
 
   constructor(props) {
     super(props)
-    console.log(this.state);
     this.setValue = this.setValue.bind(this);
 
   }
 
   componentDidMount() {
     const { drizzle } = this.props;
-    console.log(drizzle.store);
 
     // subscribe to changes in the store
     this.unsubscribe = drizzle.store.subscribe(() => {
@@ -33,9 +31,6 @@ class AppBC extends Component {
     const drizzleState = this.state.drizzleState;
     const contract = drizzle.contracts.Syllabus;
     const utnWallet = drizzleState.accounts[1];
-    console.log( "Acá necesitamos recibir por dede la App valueData o algo asi");
-    console.log( drizzleState );
-    console.log( valueData );
 
    // luego quitarlo de aca, pero no pude recibirlo por parametro:
    // ni por variable state ni por props de jsxs
