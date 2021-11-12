@@ -30,9 +30,9 @@ class Crud_Actas extends React.Component {
       </div>
 
       <Switch>
-	<Route path={CREATE_PATH}>
-	  <Create_Acta />
-	</Route>
+        <Route path={CREATE_PATH}>
+          <Create_Acta />
+        </Route>
         <Route path={READ_PATH}>
           <Read_Acta />
         </Route>

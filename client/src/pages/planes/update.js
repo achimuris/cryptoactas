@@ -1,5 +1,4 @@
 import React, { Component, useRef } from 'react';
-import Select from 'react-select';
 
 import '../Buttons.css';
 

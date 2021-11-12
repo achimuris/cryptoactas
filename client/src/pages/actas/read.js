@@ -1,5 +1,4 @@
 import React, { Component, useRef } from 'react';
-import Select from 'react-select';
 import { Redirect } from 'react-router';
 
 import '../Buttons.css';

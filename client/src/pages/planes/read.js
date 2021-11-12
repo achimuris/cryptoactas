@@ -1,8 +1,14 @@
 import React, { Component, useRef } from 'react';
-import Select from 'react-select';
+import ReactDOM from 'react-dom';
 import { Redirect } from 'react-router';
 
 import '../Buttons.css';
+
+// import drizzle functions and contract artifact
+import { Drizzle } from "@drizzle/store";
+import ContractSyllabus from "../../blockchain/contracts/Syllabus.json";
+import AppBC from "../../blockchain/AppBC";
+
 
 const URL_BACKEND = process.env.REACT_APP_URL_BACKEND;
 
@@ -11,10 +17,26 @@ class Read_Plan extends React.Component {
   constructor(props) {
       super(props)
 
+      // let drizzle know what contracts we want and how to access our test blockchain
+      const options = {
+        contracts: [ContractSyllabus],
+        web3: {
+          fallback: {
+            type: "ws",
+            url: "ws://127.0.0.1:9545",
+          },
+        },
+      };
+      
+      // setup the drizzle store and drizzle
+      const drizzle = new Drizzle(options);
+      
       this.state = {
-          records: [],
-          DataisLoaded: false
+        records: [],
+        DataisLoaded: false,
+        drizzle: drizzle
       }
+
   }  
 
   componentDidMount() {
@@ -54,7 +76,7 @@ class Read_Plan extends React.Component {
         .catch(err => console.error(err))      
         .then(res => res.json())
         .then(data => {
-          //STORE IN THE BLOCKCHAIN MOTHERFUCKER!
+          ReactDOM.render(<AppBC drizzle={this.state.drizzle} valueData={id} />, document.getElementById('divBC'));      
         });
     }
   }
@@ -83,6 +105,9 @@ class Read_Plan extends React.Component {
         <div align='center'>
           <h2>Listado de Planes</h2>
           <p/>
+          <div id="divBC">
+
+          </div>
           <table style={{border:'1px solid black'}} >
             <thead>
               <tr>
