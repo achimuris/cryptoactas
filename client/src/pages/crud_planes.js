@@ -4,7 +4,7 @@ import './Buttons.css';
 import Create_Plan from "./planes/create.js";
 import Read_Plan from "./planes/read.js";
 import Update_Plan from "./planes/update.js";
-const BASE_PATH = '/crud_plan';
+const BASE_PATH = '/crud_planes';
 const CREATE_PATH = `${BASE_PATH}/create`;
 const READ_PATH = `${BASE_PATH}/read`;
 const UPDATE_PATH = `${BASE_PATH}/update`;

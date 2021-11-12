@@ -65,7 +65,7 @@ function Create_Plan () {
       "Description": form["Description"].value,
       "YearOfValidity": form["YearOfValidity"].value,
       "MajorId": form["MajorId"].value,
-      "Subjects": form["Subjects"].value,
+      "Subjects": JSON.parse(form["Subjects"].value),
     }
 
     const requestOptions = {

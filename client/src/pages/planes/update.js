@@ -61,7 +61,7 @@ class Update_Plan extends React.Component {
           document.getElementById("Code").value=res.data.Code;
           document.getElementById("YearOfValidity").value=res.data.YearOfValidity;
           document.getElementById("MajorId").value=res.data.MajorId;
-          document.getElementById("Subjects").value=res.data.Subjects;
+          document.getElementById("Subjects").value=JSON.stringify(res.data.Subjects);
           document.getElementById("Description").value=res.data.Description;
         } else {
           //alert("Ha ocurrido un error");
@@ -110,7 +110,7 @@ class Update_Plan extends React.Component {
       "Description": document.getElementById("Description").value,
       "YearOfValidity": document.getElementById("YearOfValidity").value,
       "MajorId": document.getElementById("MajorId").value,
-      "Subjects": document.getElementById("Subjects").value,
+      "Subjects": JSON.parse(document.getElementById("Subjects").value),
     }
 
     const requestOptions = {

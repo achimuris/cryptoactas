@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './Buttons.css';
 import Create_Acta from "./actas/create.js";
 import Read_Acta from "./actas/read.js";
-import Update_Acta from "./actas/update.js";
 const BASE_PATH = '/crud_actas';
 const CREATE_PATH = `${BASE_PATH}/create`;
 const READ_PATH = `${BASE_PATH}/read`;
@@ -38,7 +37,7 @@ class Crud_Actas extends React.Component {
           <Read_Acta />
         </Route>
         <Route path={UPDATE_PATH}>
-          <Update_Acta />
+          <Create_Acta />
         </Route>
       </Switch>
     </Router>

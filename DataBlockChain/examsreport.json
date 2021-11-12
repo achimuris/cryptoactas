@@ -1,3 +1,3 @@
 [{"_id": {
     "$oid": "618830979a0d88fd9678b55e"
-},"Day":31,"Month":10,"Year":2021,"Shift":"N","IdTenuredProfessor":40100211,"IdVocalProfessor1":40100210,"IdVocalProfessor2":40100215,"IdSubject":12,"IdSyllabu":"618831019a0d88fd9678b564","Notes":[{"IdStudent":40100201,"Note":10},{"IdStudent":40100212,"Note":9}]}]
+},"Day":31,"Month":10,"Year":2021,"Shift":"N","IdTenuredProfessor":40100211,"IdVocalProfessor1":40100210,"IdVocalProfessor2":40100215,"IdSubject":12,"IdSyllabus":"618831019a0d88fd9678b564","Notes":[{"IdStudent":40100201,"Note":10},{"IdStudent":40100212,"Note":9}]}]

@@ -25,7 +25,7 @@ exports.create = function(req, res) {
     usuario.save().catch(err => {
       res.json({response: "error"})
     });
-    res.json({response: "success"})
+    res.json({response: "success", req: req.body})
 }
 
 exports.read = function(req, res) {
@@ -44,7 +44,7 @@ exports.update = function(req, res) {
 
     modelUsuario.findByIdAndUpdate({_id: id},{$set: req.body})
       .then(reg => {
-        res.json({response: "success"})
+        res.json({response: "success", req: req.body})
       })
       .catch(err => {
         res.json({response: "error"})
