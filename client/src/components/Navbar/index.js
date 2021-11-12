@@ -15,20 +15,14 @@ const Navbar = () => {
         <Bars />
 
         <NavMenu>
-          <NavLink to='/about' activeStyle>
+          <NavLink to='/about'>
             Quiénes somos
           </NavLink>
-          <NavLink to='/crud_users' activeStyle>
-            Adm. Usuarios
-          </NavLink>
-          <NavLink to='/crud_plan' activeStyle>
+          <NavLink to='/crud_planes'>
             Adm. Plan Estudios
           </NavLink>
-          <NavLink to='/crud_actas' activeStyle>
+          <NavLink to='/crud_actas'>
             Adm. Actas
-          </NavLink>
-          <NavLink to='/logout' activeStyle>
-            Cerrar sesión
           </NavLink>
           {/* Second Nav */}
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
