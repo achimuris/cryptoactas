@@ -16,25 +16,11 @@ class Read_Plan extends React.Component {
 
   constructor(props) {
       super(props)
-
-      // let drizzle know what contracts we want and how to access our test blockchain
-      const options = {
-        contracts: [ContractSyllabus],
-        web3: {
-          fallback: {
-            type: "ws",
-            url: "ws://127.0.0.1:9545",
-          },
-        },
-      };
-      
-      // setup the drizzle store and drizzle
-      const drizzle = new Drizzle(options);
-      
+    
       this.state = {
         records: [],
         DataisLoaded: false,
-        drizzle: drizzle
+        /*drizzle: drizzle*/
       }
 
   }  
@@ -65,18 +51,61 @@ class Read_Plan extends React.Component {
   } 
 
   storeInTheBC(id) {
+
     if(window.confirm('Are you sure you want to store in the blockchain? You cannot edit the record after that!')) {
-      fetch(URL_BACKEND+`api/planes/${id}`, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      })
-        .catch(err => console.error(err))      
+
+      const requestOptions = {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+          body: null
+      };
+
+      // let drizzle know what contracts we want and how to access our test blockchain
+      const options = {
+        contracts: [ContractSyllabus],
+        web3: {
+          fallback: {
+            type: "ws",
+            url: "ws://127.0.0.1:9545",
+          },
+        },
+      };
+      
+      // setup the drizzle store and drizzle
+      const drizzle = new Drizzle(options);
+      
+      fetch(URL_BACKEND+'api/planes/'+id, requestOptions)
+        .catch(err => console.error(err))
         .then(res => res.json())
-        .then(data => {
-          ReactDOM.render(<AppBC drizzle={this.state.drizzle} valueData={id} />, document.getElementById('divBC'));      
+        .then(function(response){
+
+          if(response.response == 'success') {
+            let arrValueData=[];
+            arrValueData['university']="UTN";
+            arrValueData['syllabus']=[{name:response.data.Description, carreer:response.data.MajorId}];
+            arrValueData['subjects']=[[]];
+
+            //Preparo array
+            response.data.Subjects.forEach(element => {
+              arrValueData['subjects'][0].push({
+                id:element.IdSubject,
+                name:element.Name,    
+              });
+            });
+
+            fetch(URL_BACKEND+`api/planes/${id}`, {
+              method: 'GET',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }
+            }).catch(err => console.error(err))      
+              .then(res => res.json())
+              .then(data => {
+                ReactDOM.render(<AppBC drizzle={drizzle} valueData={arrValueData} />, document.getElementById('divBC'));      
+              });
+          }
+
         });
     }
   }
