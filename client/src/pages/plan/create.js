@@ -15,16 +15,33 @@ function Create_Plan () {
     //this.setState({data});
   //}
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const form = nameForm.current;
     //alert("Contenido " + this.state.data);
     //alert(`${form['Code'].value} ${form['YearOfValidity'].value}`)
     var object = {};
     console.log("holis");
-    form.forEach(function(value, key){
-       object[key] = value;
-    });
-    alert(object["Code"]);
+    console.log(form);
+    alert("Estoy funcionando :D");
+    console.log(form["Code"].value);
+    object = {
+      "Code": form["Code"].value,
+      "Description": form["Description"].value,
+      "YearOfValidity": form["YearOfValidity"].value,
+      "MajorId": form["MajorId"].value,
+      "Subjects": [{
+         "IdSubject": 1,
+         "Code": 1,
+         "Name": "SW y los Nuevos Escenarios",
+         "TeachingHours": 6
+    }]
+    }
+    //form.forEach(function(value, key){
+    //   object[key] = value;
+    //});
+    console.log(object);
+    //alert(object["Code"]);
   }
 
 
@@ -49,18 +66,10 @@ function Create_Plan () {
                   <input type="text" name="YearOfValidity" size="10"/>
                 </label>
 	    </td>
-            <td/>
-            <td>
-                <label>
-                  Carrera:
-                  <input type="text" name="Carrera" size="50"/>
-                </label>
-            </td>
-            <td/>
             <td>
                 <label>
                   Major:
-                  <input type="text" name="Major" size="50"/>
+                  <input type="text" name="MajorId" size="50"/>
                 </label>
             </td>
           </tr>
