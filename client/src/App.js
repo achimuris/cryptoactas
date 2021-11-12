@@ -57,8 +57,7 @@ class App extends Component {
               drizzle={this.props.drizzle}
               drizzleState={this.state.drizzleState}
             />
-            <input type="submit" onClick={this.prueba}
-            />
+
         </div>
     );
   }
