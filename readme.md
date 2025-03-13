@@ -1,51 +1,66 @@
-# MERN template project
+# Crypto Actas
 
-## Introduction
-This project is a template for building fullstack JavaScript applications running on node.js. The technology stack is as follows:
-- **React** for the front-end, bootstrapped with "Create React App".
-- **express.js** for the server
-  - Serves the React app 
-  - Provides the JSON API for the React app using http
+Un proyecto con Blockchain para guardar actas de examen. Fue desarrollado en el contexto de la materia «Blockchain & Smart Contracts», correspondiente a la Maestría en Ingeniería en Sistemas de Información, de la UTN FRBA.
 
-MongoDB is not used in this template but can be easily integrated into the server app.
+## Tabla de contenidos
 
-The app is fully deployable to any PaaS like Heroku or AWS Elastic Beanstalk that understands how to build and run projects with a **package.json** file. 
+  - [ Instalación y puesta en marcha](#instalación-y-puesta-en-marcha)
+  - [ Stack tecnológico utilizado](#stack-tecnológico-utilizado)
+  - [ Especificaciones generales](#especificaciones-generales)
+  - [ Funcionalidad Frontend](#funcionalidad-frontend)
+    - [ Funcionalidades macro](#funcionalidades-macro)
+    - [ Crear usuario con los siguientes perfiles](#crear-usuario-con-los-siguientes-perfiles)
+    - [ Otras funcionalidades](#otras-funcionalidades)
+  - [ Puntos a tener en cuenta](#puntos-a-tener-en-cuenta)
 
-## Commands
-The package.json provides all the commands needed to test and run this application.
-- **npm install** install all dependencies for the server and the client.
-- **npm run build** builds the static files for the React app.
-- **npm start** starts the complete MERN app.
-- **npm run react-dev** starts the React app in development mode on http://localhost:3000. Only works if the server is started separately. 
 
-## Development
-Use this template to build your own apps. Since the React app is build using Create React App, you can easily update the React version.
+## Instalación y puesta en marcha
 
-During development of the React app, use **npm run react-dev** or simply navigate to the client folder and run **npm start**. Remember to start the server running as well. 
+Para consultar las el manual de instalación diríjase a la carpeta `docs/`.
 
-If you want reload-functionality for the server code, I recommend using something like [nodemon](https://www.npmjs.com/package/nodemon). You can then navigate to the server folder and start it using **nodemon src/index.js**. 
 
-Before deploying, build and start the app, and test that everything works on http://localhost:8080. The react app should open when you visit http://localhost:8080 in the browser and the API should be available on http://localhost:8080/api/.
+## Stack tecnológico utilizado
 
-## Configuration
-The app opens on port 8080 by default. If the environment variable **PORT** is set, that port will be used instead.
+**MERN Stack** (MongoDB, Express, React, NodeJS)
 
-In production mode, the React app expects to find the API on the same port as itself on the `/api` path. In development mode, the React app expects to find the api on http://localhost:8080/api/ instead. You can change this behaviour in the React `.env` files.
 
-## Server implementation
-It's worth noting that a few tricks are used in the server implementation to concurrently serve the API and the React app from the same server app.
 
-By default when the express.js server receives a request, it tries to match it with one of the API routes. If none matches it serves one of the static files instead. If none of those matches it serves the React index.html file. This enables client-side routing in the React app (with React Router or similar library) without overriding the server API or hiding any of the other static assets.
+## Especificaciones generales
 
-Relevant code snippets from `server.js`:
-```js
-  // Serve the static files
-  app.use(express.static(path.resolve('..', 'client', 'build'))); 
-```
+- Plan de estudio: Es un dato que se graba en la base de datos hasta que se termina de conformar con todas sus materias. Una vez cerrado el plan de estudios se persiste en la blockchain (BC) y dicho address (addr) se utiliza para identificar el Plan de estudios como id en la BC. En la base de datos tendrá su propio ID.
+- Relación docente-acta: El sistema propuesto no tiene por objetivo ser un software de administración universitaria, simplemente funciona como interfaz para persistir la información generada por terceros en la BC. El administrador crea Acta dando de alta los alumnos y los profesores, y el profesor carga las notas. No es necesario gestionar la asociación de profesores por materia.
 
-```js
-  // "Redirect" all non-API GET requests to React's entry point (index.html)
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve('..', 'client', 'build', 'index.html'))
-  );
-```
+## Funcionalidad Frontend
+
+### Funcionalidades macro
+
+- Iniciar sesión: Login en el front con registro de usuario en base de datos, sin acceso a la BC
+- ABM Plan de estudio: Materias asociadas a una carrera y universidad (addr)
+- ABM Actas: Asocia Fechas, Materias, Alumnos, Notas, Profesores y Planes de estudio
+
+### Crear usuario con los siguientes perfiles
+- Administrador:
+  - Registrar en la BC el plan de estudio en nombre de la universidad.
+  - Registrar en la BC las actas enviadas por los profesores.
+- Profesor:
+  - Carga las actas respectivas a sus materias,la fecha, los alumnos y sus calificaciones.
+(Acá no contamos con la asociación de los profesores con las materias, prescindimos de eso para simplificar el alcance).
+  - Consulta sus actas → Podríamos recortar esta funcionalidad y dejarla como Deseable
+- Alumno:
+  - Lee sus notas en las actas registradas en la BC.
+  - [Deseable] Podría darse de alta con una billetera para certificar el avance en la carrera, y escribirlo en la blockchain, relacionando address de la universidad, address del plan de estudios y todos los addresses de las actas que contienen sus finales.
+
+### Otras funcionalidades
+- Profesor CIERRA FINAL (cargando las notas / esto no graba en la blockchain)
+- Administrador “ENVÍA” todas las actas a la blockchain (y graba en la blockchain)
+- Alumno: Consulta finales aprobados (lee de la blockchain)
+- Enviar a la blockchain el plan de estudio (Nombre de universidad / materias) 
+
+## Puntos a tener en cuenta
+- ¿Qué info guardamos en la base de datos (no blockchain)?
+  - Login de usuarios (nombre, id, hash de la pass, etc.)
+  - Lista de universidades y sus datos principales (nombre, dir, id, addr)
+  - Relación entre Plan de estudio (materias), carrera y Universidad
+- ¿Qué info guardamos efectivamente en la blockchain?
+  - Plan de estudio: string[ ], address de la Universidad
+  - Acta: Plan de estudios, legajo de alumnos, notas, id profesores
